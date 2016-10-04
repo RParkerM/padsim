@@ -1,3 +1,5 @@
+let ctwDuration = 86400000;
+
 var colors = ['blue','green','red','light','dark','heart']
 	, colorsbak = ['blue','green','red','light','dark','heart']
 	, colors2 = ['blue','green','red','light','dark','heart','poison','jammer']
@@ -317,8 +319,17 @@ function darkenOrbs (matchedOrbs){
 }
 
 function changeTheWorld(){
+	if (changeTheWorldOn == 1){
+				replayMoveSet=[];
+				$(document).trigger("mouseup");
+				swapHasHappened = 1;
+				changeTheWorldOn = 0;
+				requestAction('solve', 1);
+				return;
+			}
 	changeTheWorldOn = 1;
 	if (freeToPlay != 1){
+		console.log("ctw here");
 		start();
 		ctwTimeOut.push(setTimeout(function(){
 			if (changeTheWorldOn == 1){
@@ -328,7 +339,7 @@ function changeTheWorld(){
 				changeTheWorldOn = 0;
 				requestAction('solve', 1);
 			}
-		},10000));
+		},ctwDuration));
 	}
 }
 
